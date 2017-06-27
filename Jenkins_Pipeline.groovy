@@ -96,6 +96,8 @@ waitUntil {
     /* It will fail the build */
     if (maxVULoadTime > 1000) {
     echo ("VU Load Time extended limit of 1 sec: " + maxVULoadTime)
+    def ab = httpRequest httpMode: 'POST', customHeaders: [[name: 'Authorization', value: 'Basic ' + encoded]], url: 'https://api.loadimpact.com/v2/tests/'+ tid + '/abort'
+    echo ab
     currentBuild.result = "FAILURE"
     return
     }
