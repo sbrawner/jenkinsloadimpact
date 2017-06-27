@@ -34,7 +34,7 @@ def response = httpRequest httpMode: 'POST', requestBody: "", customHeaders: [[n
 
 /* status = 201 is expected */
 if (response.status != 201) {
-  echo "Could not start test " + testId + ": " + response.status + "\n" + response.content"
+  echo "Could not start test " + testId + ": " + response.status + " " + response.content
   currentBuild.result = "FAILURE"
   return
 }
