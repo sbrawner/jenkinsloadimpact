@@ -99,9 +99,8 @@ waitUntil {
     def ab = httpRequest httpMode: 'POST', customHeaders: [[name: 'Authorization', value: 'Basic ' + encoded]], url: 'https://api.loadimpact.com/v2/tests/'+ tid + '/abort'
     if (ab.status != 201) {
         echo "Could not abort test! Please abort manually on loadimpact.com."
-        return
+    }
     currentBuild.result = "FAILURE"
-    return
     }
   }
 
