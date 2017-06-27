@@ -34,7 +34,9 @@ def response = httpRequest httpMode: 'POST', requestBody: "", customHeaders: [[n
 
 /* status = 201 is expected */
 if (response.status != 201) {
-  exit ("Could not start test " + testId + ": " + response.status + "\n" + response.content)
+  echo "Could not start test " + testId + ": " + response.status + "\n" + response.content"
+  currentBuild.result = "FAILURE"
+  return
 }
 
 def jid = jsonParse(response.content)
@@ -93,7 +95,9 @@ waitUntil {
     /* check if VU Load Time > 1000 msec */
     /* It will fail the build */
     if (maxVULoadTime > 1000) {
-     exit ("VU Load Time extended limit of 1 sec: " + maxVULoadTime)
+    echo ("VU Load Time extended limit of 1 sec: " + maxVULoadTime)
+    currentBuild.result = "FAILURE"
+    return
     }
   }
 
